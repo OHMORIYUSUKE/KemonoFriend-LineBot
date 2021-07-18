@@ -34,6 +34,7 @@ channel_access_token = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
 # print(channel_secret)
 # # -----デプロイ時は消すEND-----
 
+
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
     sys.exit(1)
