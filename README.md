@@ -1,6 +1,6 @@
 # KemonoFriend-LineBot
 
-### サーバル(けものフレンズのキャラクター)とチャットができるLINEBOTです。
+### サーバル([けものフレンズ](https://kemono-friends.jp)のキャラクター)とチャットができるLINEBOTです。
 
 <table>
 <tr>
