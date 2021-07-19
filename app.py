@@ -120,14 +120,15 @@ def handle_image(event):
         # message_idから画像のバイナリデータを取得
         message_content = line_bot_api.get_message_content(message_id)
 
-        with open(Path(f"{message_id}.jpg").absolute(), "wb") as f:
-            # バイナリを1024バイトずつ書き込む
+        message_content = line_bot_api.get_message_content(message_id)
+
+        with open('static/images/ImageMessage', 'wb') as fd:
             for chunk in message_content.iter_content():
-                f.write(chunk)
+                fd.write(chunk)
 
         print("id : "+message_id)
-        main_image_path = f"{message_id}.jpg"
-        preview_image_path = f"{message_id}.jpg"
+        main_image_path = f"static/images/ImageMessage/{message_id}.jpg"
+        preview_image_path = f"static/images/ImageMessage/{message_id}.jpg"
 
         # 画像の送信
         image_message = ImageSendMessage(
