@@ -126,8 +126,8 @@ def handle_image(event):
                 f.write(chunk)
 
         print("id : "+message_id)
-        main_image_path = f"{message_id}_main.jpg"
-        preview_image_path = f"{message_id}_preview.jpg"
+        main_image_path = f"{message_id}.jpg"
+        preview_image_path = f"{message_id}.jpg"
 
         # 画像の送信
         image_message = ImageSendMessage(
