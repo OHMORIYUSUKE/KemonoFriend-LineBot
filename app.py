@@ -126,7 +126,6 @@ def handle_image(event):
                 f.write(chunk)
 
         print("id : "+message_id)
-
         main_image_path = f"static/images/ImageMessage/{message_id}_main.jpg"
         preview_image_path = f"static/images/ImageMessage/{message_id}_preview.jpg"
 
