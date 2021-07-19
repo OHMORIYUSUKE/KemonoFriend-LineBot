@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import Path
 
 from flask import Flask, request, abort
 
@@ -74,7 +75,11 @@ def handle_follow(event):
     text_message1 = "あたらしいフレンズだ！"
     text_message2 = "私はサーバルだよ！\nよろしくね！"
 
-    line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=text_message1),ImageSendMessage(preview_image_url=image_url, original_content_url=image_url),TextSendMessage(text=text_message2)])
+    line_bot_api.reply_message(event.reply_token,
+                               [TextSendMessage(text=text_message1),
+                                ImageSendMessage(preview_image_url=image_url,
+                                                 original_content_url=image_url),
+                                TextSendMessage(text=text_message2)])
 
 @handler.add(UnfollowEvent)
 def handle_unfollow(event):
@@ -91,20 +96,45 @@ def handle_message(event):
 def handle_sticker(event):
     print("スタンプ")
     # 画像の送信
-    image_url = "https://pbs.twimg.com/media/DKuRcKqUEAACAID.png"
+    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal.png"
     text_message = "スタンプ分からないよー！"
     line_bot_api.reply_message(event.reply_token,
                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
                                 TextSendMessage(text=text_message)])
 
-@handler.add(MessageEvent,message=ImageMessage)
+# @handler.add(MessageEvent,message=ImageMessage)
+# def handle_image(event):
+#     # 画像の送信
+#     image_url = "https://pbs.twimg.com/media/DKuRcKqUEAACAID.png"
+#     text_message = "画像分からないよー！"
+#     line_bot_api.reply_message(event.reply_token,
+#                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
+#                                 TextSendMessage(text=text_message)])
+
+# ----------------------------------------------------------
+@handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
+    message_id = event.message.id
+
+    # message_idから画像のバイナリデータを取得
+    message_content = line_bot_api.get_message_content(message_id)
+
+    with open(Path(f"static/images/ImageMessage/{message_id}.jpg").absolute(), "wb") as f:
+        # バイナリを1024バイトずつ書き込む
+        for chunk in message_content.iter_content():
+            f.write(chunk)
+
+    main_image_path = f"static/images/ImageMessage/{message_id}_main.jpg"
+    preview_image_path = f"static/images/ImageMessage/{message_id}_preview.jpg"
+
     # 画像の送信
-    image_url = "https://pbs.twimg.com/media/DKuRcKqUEAACAID.png"
-    text_message = "画像分からないよー！"
-    line_bot_api.reply_message(event.reply_token,
-                               [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
-                                TextSendMessage(text=text_message)])
+    image_message = ImageSendMessage(
+        original_content_url=f"https://kemonofriendlinebot.herokuapp.com/{main_image_path}",
+        preview_image_url=f"https://kemonofriendlinebot.herokuapp.com/{preview_image_path}",
+    )
+    print("画像を保存しました。")
+    line_bot_api.reply_message(event.reply_token, image_message)
+# ----------------------------------------------------------
 
 if __name__ == "__main__":
     app.run()
