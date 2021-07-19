@@ -102,44 +102,15 @@ def handle_sticker(event):
                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
                                 TextSendMessage(text=text_message)])
 
-# @handler.add(MessageEvent,message=ImageMessage)
-# def handle_image(event):
-#     # 画像の送信
-#     image_url = "https://pbs.twimg.com/media/DKuRcKqUEAACAID.png"
-#     text_message = "画像分からないよー！"
-#     line_bot_api.reply_message(event.reply_token,
-#                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
-#                                 TextSendMessage(text=text_message)])
-
-# ----------------------------------------------------------
-@handler.add(MessageEvent, message=ImageMessage)
+@handler.add(MessageEvent,message=ImageMessage)
 def handle_image(event):
-    message_id = event.message.id
+    # 画像の送信
+    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
+    text_message = "画像分からないよー！"
+    line_bot_api.reply_message(event.reply_token,
+                               [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
+                                TextSendMessage(text=text_message)])
 
-    try:
-        # message_idから画像のバイナリデータを取得
-        message_content = line_bot_api.get_message_content(message_id)
-
-        message_content = line_bot_api.get_message_content(message_id)
-
-        with open('static/images/ImageMessage', 'wb') as fd:
-            for chunk in message_content.iter_content():
-                fd.write(chunk)
-
-        print("id : "+message_id)
-        main_image_path = f"static/images/ImageMessage/{message_id}.jpg"
-        preview_image_path = f"static/images/ImageMessage/{message_id}.jpg"
-
-        # 画像の送信
-        image_message = ImageSendMessage(
-            original_content_url=f"https://kemonofriendlinebot.herokuapp.com/{main_image_path}",
-            preview_image_url=f"https://kemonofriendlinebot.herokuapp.com/{preview_image_path}",
-        )
-        line_bot_api.reply_message(event.reply_token, image_message)
-    except:
-        import traceback
-        traceback.print_exc()
-# ----------------------------------------------------------
 
 if __name__ == "__main__":
     app.run()
