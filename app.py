@@ -1,6 +1,5 @@
 import os
 import sys
-from pathlib import Path
 
 from flask import Flask, request, abort
 
