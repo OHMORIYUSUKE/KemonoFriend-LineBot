@@ -1,15 +1,11 @@
 certifi==2021.5.30
 charset-normalizer==2.0.3
-colorama==0.4.4
-Cython==0.29.21
 Flask==2.0.1
 gensim==4.0.1
 gunicorn==20.1.0
 itsdangerous==2.0.1
 Janome==0.4.1
-Jinja2==3.0.1
 line-bot-sdk==1.19.0
-MarkupSafe==2.0.1
 python-dateutil==2.8.2
 python-Levenshtein-wheels==0.13.2
 requests==2.26.0
