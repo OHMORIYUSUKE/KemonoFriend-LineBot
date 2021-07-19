@@ -71,7 +71,7 @@ def callback():
 @handler.add(FollowEvent)
 def handle_follow(event):
     # 画像の送信
-    image_url = "https://img.atwikiimg.com/www30.atwiki.jp/niconicomugen/attach/8562/18049/serval_1.png"
+    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal.png"
     text_message1 = "あたらしいフレンズだ！"
     text_message2 = "私はサーバルだよ！\nよろしくね！"
 
@@ -96,7 +96,7 @@ def handle_message(event):
 def handle_sticker(event):
     print("スタンプ")
     # 画像の送信
-    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal.png"
+    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
     text_message = "スタンプ分からないよー！"
     line_bot_api.reply_message(event.reply_token,
                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
@@ -116,24 +116,27 @@ def handle_sticker(event):
 def handle_image(event):
     message_id = event.message.id
 
-    # message_idから画像のバイナリデータを取得
-    message_content = line_bot_api.get_message_content(message_id)
+    try:
+        # message_idから画像のバイナリデータを取得
+        message_content = line_bot_api.get_message_content(message_id)
 
-    with open(Path(f"static/images/ImageMessage/{message_id}.jpg").absolute(), "wb") as f:
-        # バイナリを1024バイトずつ書き込む
-        for chunk in message_content.iter_content():
-            f.write(chunk)
+        with open(Path(f"static/images/ImageMessage/{message_id}.jpg").absolute(), "wb") as f:
+            # バイナリを1024バイトずつ書き込む
+            for chunk in message_content.iter_content():
+                f.write(chunk)
 
-    main_image_path = f"static/images/ImageMessage/{message_id}_main.jpg"
-    preview_image_path = f"static/images/ImageMessage/{message_id}_preview.jpg"
+        main_image_path = f"static/images/ImageMessage/{message_id}_main.jpg"
+        preview_image_path = f"static/images/ImageMessage/{message_id}_preview.jpg"
 
-    # 画像の送信
-    image_message = ImageSendMessage(
-        original_content_url=f"https://kemonofriendlinebot.herokuapp.com/{main_image_path}",
-        preview_image_url=f"https://kemonofriendlinebot.herokuapp.com/{preview_image_path}",
-    )
-    print("画像を保存しました。")
-    line_bot_api.reply_message(event.reply_token, image_message)
+        # 画像の送信
+        image_message = ImageSendMessage(
+            original_content_url=f"https://kemonofriendlinebot.herokuapp.com/{main_image_path}",
+            preview_image_url=f"https://kemonofriendlinebot.herokuapp.com/{preview_image_path}",
+        )
+        line_bot_api.reply_message(event.reply_token, image_message)
+    except:
+        import traceback
+        traceback.print_exc()
 # ----------------------------------------------------------
 
 if __name__ == "__main__":
