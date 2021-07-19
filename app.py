@@ -125,6 +125,8 @@ def handle_image(event):
             for chunk in message_content.iter_content():
                 f.write(chunk)
 
+        print("id : "+message_id)
+
         main_image_path = f"static/images/ImageMessage/{message_id}_main.jpg"
         preview_image_path = f"static/images/ImageMessage/{message_id}_preview.jpg"
 
