@@ -117,20 +117,18 @@ def handle_image_message(event):
     message_content = line_bot_api.get_message_content(message_id)
     img = message_content.content
 
-    P = message_id+".jpg"
+    P = "static/" + message_id + ".jpg"
     mode = 'a' if os.path.exists(P) else 'wb'
-    with open(P,mode) as f:
+    with open(P, mode) as f:
         f.write(img)
 
     message = reply_image_create.main(message_id + ".jpg")
 
-    print(message)
-
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = FQDN + message_id + ".jpg",
-            preview_image_url = FQDN + message_id + ".jpg"
+            original_content_url=FQDN + "static/" + message_id + ".jpg",
+            preview_content_url=FQDN + "static/" + message_id + ".jpg"
         )
     )
 #####################################################
