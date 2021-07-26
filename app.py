@@ -122,9 +122,9 @@ def handle_image_message(event):
     with open(P,mode) as f:
         f.write(img)
 
-    #message = reply_image_create.main(message_id + ".jpg")
+    message = reply_image_create.main(message_id + ".jpg")
 
-    #print(message)
+    print(message)
 
     line_bot_api.reply_message(
         event.reply_token,
