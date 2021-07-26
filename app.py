@@ -14,6 +14,7 @@ from linebot.models import (
     StickerMessage,
 )
 
+import reply_image_create
 import reply_message_create
 
 app = Flask(__name__)
@@ -121,11 +122,15 @@ def handle_image_message(event):
     with open(P,mode) as f:
         f.write(img)
 
+    message = reply_image_create.main(FQDN + "static/" + message_id + ".jpg")
+
+    print(message)
+
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = FQDN + "static/" + message_id + ".jpg",
-            preview_image_url = FQDN + "static/" + message_id + ".jpg"
+            original_content_url = FQDN + "static/" + message_id + "_result.jpg",
+            preview_image_url = FQDN + "static/" + message_id + "_result.jpg"
         )
     )
 #####################################################
