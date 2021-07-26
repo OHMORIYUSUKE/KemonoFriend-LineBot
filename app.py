@@ -128,7 +128,7 @@ def handle_image_message(event):
         event.reply_token,
         ImageSendMessage(
             original_content_url=FQDN + "static/" + message_id + ".jpg",
-            preview_content_url=FQDN + "static/" + message_id + ".jpg"
+            preview_image_url=FQDN + "static/" + message_id + ".jpg"
         )
     )
 #####################################################
