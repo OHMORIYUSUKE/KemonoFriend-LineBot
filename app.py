@@ -101,14 +101,34 @@ def handle_sticker(event):
                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
                                 TextSendMessage(text=text_message)])
 
-@handler.add(MessageEvent,message=ImageMessage)
-def handle_image(event):
-    # 画像の送信
-    image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
-    text_message = "画像分からないよー！"
-    line_bot_api.reply_message(event.reply_token,
-                               [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
-                                TextSendMessage(text=text_message)])
+# @handler.add(MessageEvent,message=ImageMessage)
+# def handle_image(event):
+#     # 画像の送信
+#     image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
+#     text_message = "画像分からないよー！"
+#     line_bot_api.reply_message(event.reply_token,
+#                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
+#                                 TextSendMessage(text=text_message)])
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image_message(event):
+    FQDN = "https://kemonofriendlinebot.herokuapp.com/"
+    message_id = event.message.id
+    message_content = line_bot_api.get_message_content(message_id)
+    img = message_content.content
+
+    P = "static/"+message_id+".jpg"
+    mode = 'a' if os.path.exists(P) else 'wb'
+    with open(P,mode) as f:
+        f.write(img)
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url = FQDN + "static/" + message_id + ".jpg",
+            preview_image_url = FQDN + "static/" + message_id + ".jpg"
+        )
+    )
+#####################################################
 
 
 if __name__ == "__main__":
