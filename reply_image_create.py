@@ -55,6 +55,7 @@ def main(file_path):
             image = overlayImage(image, img, (x-20, y-70))
         # 結果を出力
         cv2.imwrite(file_path, image)
+
     except Exception as e:
         print(e)
     return 'OK'
