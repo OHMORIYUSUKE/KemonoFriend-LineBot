@@ -30,7 +30,7 @@ def main(file_path):
         # ダウンロードしたファイルを指定
         cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
         # 検出する画像ファイル読み込み
-        image = cv2.imread(file_path, cv2.IMREAD_COLOR)
+        image = cv2.imread("static/" + file_path, cv2.IMREAD_COLOR)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = cv2.equalizeHist(gray)
 
