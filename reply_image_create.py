@@ -17,7 +17,6 @@ def overlayImage(src, overlay, location):
     pil_overlay = pil_overlay.convert('RGBA')
 
     # 画像を合成
-
     pil_tmp = Image.new('RGBA', pil_src.size, (255, 255, 255, 0))
     pil_tmp.paste(pil_overlay, location, pil_overlay)
     result_image = Image.alpha_composite(pil_src, pil_tmp)

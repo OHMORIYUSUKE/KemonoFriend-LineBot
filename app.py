@@ -17,7 +17,6 @@ from linebot.models import (
 import reply_image_create
 import reply_message_create
 
-
 app = Flask(__name__)
 
 # デプロイ時はコメントアウトを取り消す
@@ -103,14 +102,6 @@ def handle_sticker(event):
                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
                                 TextSendMessage(text=text_message)])
 
-# @handler.add(MessageEvent,message=ImageMessage)
-# def handle_image(event):
-#     # 画像の送信
-#     image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
-#     text_message = "画像分からないよー！"
-#     line_bot_api.reply_message(event.reply_token,
-#                                [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
-#                                 TextSendMessage(text=text_message)])
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
     FQDN = "https://kemonofriendlinebot.herokuapp.com/"
@@ -132,8 +123,6 @@ def handle_image_message(event):
             preview_image_url=FQDN + "static/" + message_id + ".jpg"
         )
     )
-#####################################################
-
 
 if __name__ == "__main__":
     app.run()
