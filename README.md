@@ -3,7 +3,7 @@
 ### お友達登録はこちら ↓
 
 <div align="center">
-<img width=50% src="./READMEimages/921ppfrn.png">
+<img width=35% src="./READMEimages/921ppfrn.png">
 </div>
 
 ### サーバル([けものフレンズ](https://kemono-friends.jp)のキャラクター)とチャットができるLINEBOTです。
