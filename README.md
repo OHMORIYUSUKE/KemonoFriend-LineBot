@@ -1,5 +1,11 @@
 # KemonoFriend-LineBot
 
+### お友達登録はこちら ↓
+
+<div align="center">
+<img width=50% src="./READMEimages/921ppfrn.png">
+</div>
+
 ### サーバル([けものフレンズ](https://kemono-friends.jp)のキャラクター)とチャットができるLINEBOTです。
 
 #### 機能
@@ -11,8 +17,8 @@
 
 <table>
 <tr>
-<td><img src="./READMEimages/921ppfrn.png"></td>
 <td><img src="./READMEimages/Screenshot_20210719-055222_LINE.jpg"></td>
+<td><img src="./READMEimages/Screenshot_20210728-102510_LINE.jpg"></td>
 </tr>
 </table>
 
