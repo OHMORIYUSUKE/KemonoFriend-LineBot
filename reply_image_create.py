@@ -52,7 +52,7 @@ def main(file_path):
             img = cv2.resize(img, size)
 
             # 画像のオーバーレイ
-            image = overlayImage(image, img, (x-20, y-70))
+            image = overlayImage(image, img, (x - int(w / 2), y - int(h + 20)))
         # 結果を出力
         cv2.imwrite("static/" + file_path, image)
 
