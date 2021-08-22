@@ -99,7 +99,8 @@ def handle_sticker(event):
     image_url = "https://kemonofriendlinebot.herokuapp.com/static/images/ReplyImage/sabal_naki.png"
     text_message = "スタンプ分からないよー！"
     line_bot_api.reply_message(event.reply_token,
-                               [ImageSendMessage(preview_image_url=image_url,original_content_url=image_url),
+                               [ImageSendMessage(preview_image_url=image_url,
+                                                 original_content_url=image_url),
                                 TextSendMessage(text=text_message)])
 
 @handler.add(MessageEvent, message=ImageMessage)
