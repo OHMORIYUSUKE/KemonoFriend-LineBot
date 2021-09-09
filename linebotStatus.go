@@ -47,7 +47,7 @@ func main() {
   } else {
 	fmt.Println("error"); 
 
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。:weary:", 1)
+	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
 	//fmt.Println(replacedMd)
 
 	file, err := os.Create("README.md")
