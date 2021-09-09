@@ -13,6 +13,8 @@ import (
 func main() {
   url := os.Getenv("WEBHOOK_URL")
 
+
+  
   resp, _ := http.Get(url)
   defer resp.Body.Close()
 
