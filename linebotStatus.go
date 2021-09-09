@@ -33,7 +33,8 @@ func main() {
   if string(byteArray) == "hello world!" {
 	fmt.Println("OK");
     
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できます。:smile:", 1)
+	replacedMd := strings.Replace(string(b), "## 現在、利用できます。:smile:", "## 現在、利用できます。:smile:", 1)
+  replacedMd := strings.Replace(string(b), "## 現在、利用できません。サーバーでエラーが生じています。:weary:", "## 現在、利用できます。:smile:", 1)
 	//fmt.Println(replacedMd)
 
 	file, err := os.Create("README.md")
@@ -47,7 +48,8 @@ func main() {
   } else {
 	fmt.Println("error"); 
 
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
+	replacedMd := strings.Replace(string(b), "## 現在、利用できません。サーバーでエラーが生じています。:weary:", "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
+  replacedMd := strings.Replace(string(b), "## 現在、利用できます。:smile:", "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
 	//fmt.Println(replacedMd)
 
 	file, err := os.Create("README.md")
