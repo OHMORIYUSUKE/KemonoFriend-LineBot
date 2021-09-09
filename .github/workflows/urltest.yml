@@ -1,0 +1,25 @@
+on:
+  push:
+  schedule:
+    - cron: "00 * * * *"
+
+jobs:
+  run:
+    name: run
+    runs-on: ubuntu-latest
+    steps:
+      # GOPATH等のセットアップ
+      - name: Set Up
+        uses: actions/setup-go@v2
+        with:
+          go-version: ~1.15
+
+      # repositoryの中身にアクセスするためにチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 実行
+      - name: Run
+        run: go run linebotStatus.go
+        env:
+          WEBHOOK_URL: ${{ secrets.HEROKU_URL }}
