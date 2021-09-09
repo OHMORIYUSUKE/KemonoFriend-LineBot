@@ -6,6 +6,7 @@ import (
   "io/ioutil"
   "os"
   "strings"
+  "log"
 )
 
 func main() {
@@ -33,12 +34,28 @@ func main() {
 	fmt.Println("OK");
     
 	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できます。:smile:", 1)
-	fmt.Println(replacedMd)
+	//fmt.Println(replacedMd)
+
+	file, err := os.Create("README.md")
+    if err != nil {
+        log.Fatal(err)  //ファイルが開けなかったときエラー出力
+    }
+    defer file.Close()
+
+    file.Write(([]byte)(replacedMd))
 
   } else {
 	fmt.Println("error"); 
 
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
-	fmt.Println(replacedMd)
+	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。:weary:", 1)
+	//fmt.Println(replacedMd)
+
+	file, err := os.Create("README.md")
+    if err != nil {
+        log.Fatal(err)  //ファイルが開けなかったときエラー出力
+    }
+    defer file.Close()
+
+    file.Write(([]byte)(replacedMd))
   }
 }
