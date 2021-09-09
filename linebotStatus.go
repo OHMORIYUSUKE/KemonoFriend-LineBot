@@ -5,6 +5,7 @@ import (
   "net/http"
   "io/ioutil"
   "os"
+  "regexp"
   "strings"
   "log"
 )
@@ -31,31 +32,44 @@ func main() {
   //-------------------------------------
 
   if string(byteArray) == "hello world!" {
-	fmt.Println("OK");
-    
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できます。:smile:", 1)
-	//fmt.Println(replacedMd)
+    fmt.Println("OK");
+      
+    //replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できます。:smile:", 1)
+    //fmt.Println(replacedMd)
 
-	file, err := os.Create("README.md")
-    if err != nil {
-        log.Fatal(err)  //ファイルが開けなかったときエラー出力
-    }
-    defer file.Close()
+    str := []byte(string(b))
+    assigned := regexp.MustCompile("<!--status-->\n\n(.*)\n\n<!--status-->")
+    group := assigned.FindSubmatch(str)
+    fmt.Println(string(group[1]))
 
-    file.Write(([]byte)(replacedMd))
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できます。:smile:", 1)
+    //fmt.Println(replacedMd)
+  
+    file, err := os.Create("README.md")
+      if err != nil {
+          log.Fatal(err)  //ファイルが開けなかったときエラー出力
+      }
+      defer file.Close()
+  
+      file.Write(([]byte)(replacedMd))
+  
 
   } else {
-	fmt.Println("error"); 
+    fmt.Println("error"); 
+    str := []byte(string(b))
+    assigned := regexp.MustCompile("<!--status-->\n\n(.*)\n\n<!--status-->")
+    group := assigned.FindSubmatch(str)
+    fmt.Println(string(group[1]))
 
-	replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できません。:weary:", 1)
-	//fmt.Println(replacedMd)
-
-	file, err := os.Create("README.md")
-    if err != nil {
-        log.Fatal(err)  //ファイルが開けなかったときエラー出力
-    }
-    defer file.Close()
-
-    file.Write(([]byte)(replacedMd))
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
+    //fmt.Println(replacedMd)
+  
+    file, err := os.Create("README.md")
+      if err != nil {
+          log.Fatal(err)  //ファイルが開けなかったときエラー出力
+      }
+      defer file.Close()
+  
+      file.Write(([]byte)(replacedMd))
   }
 }
