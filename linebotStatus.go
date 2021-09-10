@@ -31,6 +31,12 @@ func main() {
     // 出力
     //fmt.Println(string(b))
   //-------------------------------------
+  now := time.Now()
+    fmt.Println(now.Format(time.RFC3339))
+
+    nowUTC := now.UTC() 
+    fmt.Println(nowUTC.Format(time.RFC3339))
+    
   jst := time.FixedZone("Asia/Tokyo", 9*60*60)
 
     nowJST := nowUTC.In(jst)                        
