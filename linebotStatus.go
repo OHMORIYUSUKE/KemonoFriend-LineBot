@@ -26,10 +26,7 @@ func main() {
     }
     defer f.Close()
 
-    // 一気に全部読み取り
     b, err := ioutil.ReadAll(f)
-    // 出力
-    //fmt.Println(string(b))
   //-------------------------------------
   now := time.Now()
     fmt.Println(now.Format(time.RFC3339))
@@ -56,7 +53,7 @@ func main() {
   
     file, err := os.Create("README.md")
       if err != nil {
-          log.Fatal(err)  //ファイルが開けなかったときエラー出力
+          log.Fatal(err) 
       }
       defer file.Close()
   
@@ -71,11 +68,10 @@ func main() {
     fmt.Println(string(group[1]))
 
     replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"+nowJST.Format(time.RFC3339)+"現在", 1)
-    //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
       if err != nil {
-          log.Fatal(err)  //ファイルが開けなかったときエラー出力
+          log.Fatal(err) 
       }
       defer file.Close()
   
