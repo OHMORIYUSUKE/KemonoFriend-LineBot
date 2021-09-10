@@ -34,9 +34,6 @@ func main() {
   if string(byteArray) == "hello world!" {
     fmt.Println("OK");
       
-    //replacedMd := strings.Replace(string(b), "{status}", "## 現在、利用できます。:smile:", 1)
-    //fmt.Println(replacedMd)
-
     str := []byte(string(b))
     assigned := regexp.MustCompile("<!--status-->\n\n(.*)\n\n<!--status-->")
     group := assigned.FindSubmatch(str)
