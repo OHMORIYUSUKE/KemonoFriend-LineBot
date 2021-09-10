@@ -58,7 +58,6 @@ func main() {
       defer file.Close()
   
       file.Write(([]byte)(replacedMd))
-  
 
   } else {
     fmt.Println("error"); 
