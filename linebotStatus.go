@@ -35,7 +35,7 @@ func main() {
     fmt.Println("OK");
       
     str := []byte(string(b))
-    assigned := regexp.MustCompile("<!--status-->\n\n(.*)\n\n<!--status-->")
+    assigned := regexp.MustCompile("<!--status-->(.*)<!--status-->")
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
