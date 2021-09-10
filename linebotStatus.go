@@ -36,7 +36,7 @@ func main() {
 
     nowUTC := now.UTC() 
     fmt.Println(nowUTC.Format(time.RFC3339))
-    
+
   jst := time.FixedZone("Asia/Tokyo", 9*60*60)
 
     nowJST := nowUTC.In(jst)                        
@@ -47,11 +47,11 @@ func main() {
     fmt.Println("OK");
       
     str := []byte(string(b))
-    assigned := regexp.MustCompile("<!--status-->(.*)<!--status-->")
+    assigned := regexp.MustCompile("<!--status-->\r\n\r\n(.*)\r\n\r\n<!--status-->")
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
-    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できます。:smile:"+nowJST.Format(time.RFC3339), 1)
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できます。:smile:"+nowJST.Format(time.RFC3339)+"現在", 1)
     //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
@@ -66,11 +66,11 @@ func main() {
   } else {
     fmt.Println("error"); 
     str := []byte(string(b))
-    assigned := regexp.MustCompile("<!--status-->\n\n(.*)\n\n<!--status-->")
+    assigned := regexp.MustCompile("<!--status-->\r\n\r\n(.*)\r\n\r\n<!--status-->")
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
-    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"+nowJST.Format(time.RFC3339), 1)
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"+nowJST.Format(time.RFC3339)+"現在", 1)
     //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
