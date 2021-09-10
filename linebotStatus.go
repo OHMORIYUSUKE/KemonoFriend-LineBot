@@ -18,7 +18,6 @@ func main() {
   defer resp.Body.Close()
 
   byteArray, _ := ioutil.ReadAll(resp.Body)
-
   //-------------------------------------
   f, err := os.Open("README.md")
     if err != nil{
