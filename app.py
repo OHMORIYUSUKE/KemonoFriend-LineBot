@@ -45,7 +45,6 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_secret)
 handler = WebhookHandler(channel_access_token)
 
-
 @app.route("/")
 def hello_world():
     return "hello world!"
