@@ -30,6 +30,11 @@ func main() {
     // 出力
     //fmt.Println(string(b))
   //-------------------------------------
+  jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+
+    nowJST := nowUTC.In(jst)                        
+    fmt.Println(nowJST.Format(time.RFC3339))
+  //-------------------------------------
 
   if string(byteArray) == "hello world!" {
     fmt.Println("OK");
@@ -39,7 +44,7 @@ func main() {
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
-    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できます。:smile:", 1)
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できます。:smile:"+nowJST.Format(time.RFC3339), 1)
     //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
@@ -58,7 +63,7 @@ func main() {
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
-    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:", 1)
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"++nowJST.Format(time.RFC3339), 1)
     //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
