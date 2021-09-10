@@ -63,7 +63,7 @@ func main() {
     group := assigned.FindSubmatch(str)
     fmt.Println(string(group[1]))
 
-    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"++nowJST.Format(time.RFC3339), 1)
+    replacedMd := strings.Replace(string(b), string(group[1]), "## 現在、利用できません。サーバーでエラーが生じています。:weary:"+nowJST.Format(time.RFC3339), 1)
     //fmt.Println(replacedMd)
   
     file, err := os.Create("README.md")
