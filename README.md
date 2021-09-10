@@ -1,7 +1,10 @@
 # KemonoFriend-LineBot
 
-## 現在、利用できません。サーバーでエラーが生じています。:weary:
+<!--status-->
 
+## 現在、利用できます。:smile:
+
+<!--status-->
 
 ### お友達登録はこちら ↓
 
